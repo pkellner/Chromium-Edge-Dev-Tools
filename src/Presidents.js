@@ -1,27 +1,33 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../static/site.css";``
+import "../static/site.css";
+``;
 import PresidentDetail from "./PresidentDetail";
 import useAxiosFetch from "./useAxiosFetch";
-import axios from 'axios';
+import axios from "axios";
 
-const Speakers = ({}) => {
-  const {data, isLoading, hasErrored, errorMessage, updateDataRecord
-    } = useAxiosFetch("http://localhost:4000/presidents", []);
+const Presidents = ({}) => {
+  const {
+    data,
+    isLoading,
+    hasErrored,
+    errorMessage,
+    updateDataRecord
+  } = useAxiosFetch("http://localhost:4000/presidents", []);
 
-  const heartFavoriteHandler = (e, speakerRec) => {
+  const heartFavoriteHandler = (e, presidentRec) => {
     e.preventDefault();
-    // const toggledRec = { ...speakerRec, favorite: !speakerRec.favorite };
-    // axios.put(`http://localhost:4000/presidents/${speakerRec.id}`, toggledRec)
-    //   .then(function(response) {
-    //     updateDataRecord(toggledRec);
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //   });
+    const toggledRec = { ...presidentRec, favorite: !presidentRec.favorite };
+    axios
+      .put(`http://localhost:4000/presidents/${presidentRec.id}`, toggledRec)
+      .then(function(response) {
+        updateDataRecord(toggledRec);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
-  debugger;
   const presidentsList = isLoading ? [] : data;
 
   if (hasErrored)
@@ -39,15 +45,28 @@ const Speakers = ({}) => {
         <div className="row">
           <div className="card-deck">
             {presidentsList.map(
-              ({ id, president, homeState,favorite }) => {
+              ({
+                id,
+                president,
+                wikipediaEntry,
+                tookOffice,
+                leftOffice,
+                party,
+                homeState,
+                favorite
+              }) => {
                 return (
                   <PresidentDetail
                     key={id}
                     id={id}
+                    president={president}
+                    wikipediaEntry={wikipediaEntry}
+                    tookOffice={tookOffice}
+                    leftOffice={leftOffice}
+                    party={party}
+                    homeState={homeState}
                     favorite={favorite}
                     onHeartFavoriteHandler={heartFavoriteHandler}
-                    president={president}
-                    homeState={homeState}
                   />
                 );
               }
@@ -59,4 +78,4 @@ const Speakers = ({}) => {
   );
 };
 
-export default Speakers;
+export default Presidents;

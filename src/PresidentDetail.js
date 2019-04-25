@@ -1,15 +1,20 @@
 const PresidentDetail = ({
   id,
   president,
-  favorite,
+  wikipediaEntry,
+  tookOffice,
+  leftOffice,
+  party,
   homeState,
+  favorite,
   onHeartFavoriteHandler
 }) => {
   return (
     <div className="card col-4 cardmin">
       <span>
-            {president}<br/> Home State: {homeState}
-          </span>
+        {president}
+        <br /> Home State: {homeState}
+      </span>
       <img
         className="card-img-top"
         src={`/static/presidents/${id}.jpg`}
@@ -22,11 +27,17 @@ const PresidentDetail = ({
             className={favorite ? "heartredbutton" : "heartdarkbutton"}
             onClick={e => {
               onHeartFavoriteHandler(e, {
-                id
+                id,
+                president,
+                wikipediaEntry,
+                tookOffice,
+                leftOffice,
+                party,
+                homeState,
+                favorite
               });
             }}
           />
-
         </h4>
       </div>
     </div>
