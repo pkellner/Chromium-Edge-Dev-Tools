@@ -41,7 +41,11 @@ const Presidents = ({}) => {
 
   return (
     <div>
+
       <div className="container">
+        <div className="jumbotron align-content-center">
+          <h1>US Presidents</h1>
+        </div>
         <div className="row">
           <div className="card-deck">
             {presidentsList.map(

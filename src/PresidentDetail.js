@@ -22,22 +22,25 @@ const PresidentDetail = ({
       />
       <div className="card-body">
         <h4 className="card-title">
-          <button
-            data-id={id}
-            className={favorite ? "heartredbutton" : "heartdarkbutton"}
-            onClick={e => {
-              onHeartFavoriteHandler(e, {
-                id,
-                president,
-                wikipediaEntry,
-                tookOffice,
-                leftOffice,
-                party,
-                homeState,
-                favorite
-              });
-            }}
-          />
+          <div className="float-right">
+            <button
+              data-id={id}
+              className={favorite ? "heartredbutton" : "heartdarkbutton"}
+              onClick={e => {
+                onHeartFavoriteHandler(e, {
+                  id,
+                  president,
+                  wikipediaEntry,
+                  tookOffice,
+                  leftOffice,
+                  party,
+                  homeState,
+                  favorite
+                });
+              }}
+            />
+          </div>
+          <span>#{id}</span>
         </h4>
       </div>
     </div>
